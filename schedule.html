@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kebantai - Schedule</title>
+    <link rel="stylesheet" href="./schedule.css">
+</head>
+<body>
+    <div class="wrapper">
+        <header>
+            <div id="logo">
+                <a href="#">KEBANTAI</a>
+            </div>
+            <div class="toggle" onclick="toggleMenu();"></div>
+            <ul class="navigation">
+                <li><a href="#">POST REQUESTS</a></li>
+                <li><a href="#" class="active-page">MATCHES</a></li>
+                <li><a href="#">SCHEDULE</a></li>
+                <li><a href="#">CHATROOM</a></li>
+                <li><a href="#">PROFILE</a></li>
+            </ul>
+        </header>
+        <div class="content">
+            <h2 id="schedule-title">Your Schedule</h2>
+            <div class="display-container">
+                <div class="display-content-per-date">
+                    <h4 class="display-date">Monday Dec 28, 07:00 WIB</h4>
+                    <ul class="display-list">
+                        <li class="display-item" id="display-basketball">
+                            <div class="display-color-identifier"><img src="./images/basketball2.svg" alt=""></div>
+                            <div class="display-text">
+                                <h2 class="display-title">Weekly Practice</h2>
+                                <div class="display-amount">
+                                    <img src="./images/group.svg" alt="">
+                                    <p>3 / 10</p>
+                                </div>
+                                <p class="display-peoplepref2 display-male2">
+                                    male only
+                                </p>
+                                <!-- <p class="display-organized">Organized by <b>Ernest</b></p> -->
+                            </div>
+                            <div class="display-bar"></div>
+                            <div class="display-location">
+                                <p class="display-place" style="text-overflow: ellipsis">Orion Sport Center Tangerang</p>
+                                <p class="display-address">Jl. Sukajadi</p>
+                            </div>
+                            <div class="display-peoplepref display-male">
+                                <div class="display-sex-icon"><img src="./images/male.svg" alt="malesign"></div>
+                                <p class="display-sex-text">male only</p>
+                            </div>
+                            <button type="submit" class="display-leave">
+                                <p>Leave</p>
+                                <img src="./images/Leave.svg" alt="">
+                            </button>
+                        </li>
+                        <li class="display-item" id="display-soccer">
+                            <div class="display-color-identifier"><img src="./images/soccer2.svg" alt=""></div>
+                            <div class="display-text">
+                                <h2 class="display-title">Latihan Cabskuy</h2>
+                                <div class="display-amount">
+                                    <img src="./images/group.svg" alt="">
+                                    <p>20 / 22</p>
+                                </div>
+                                <p class="display-peoplepref2 display-female2">
+                                    female only
+                                </p>
+                                <!-- <p class="display-organized">Organized by <b>Ernest</b></p> -->
+                            </div>
+                            <div class="display-bar"></div>
+                            <div class="display-location">
+                                <p class="display-place">Bikasoga Sport Center</p>
+                                <p class="display-address">Jl. Suryalaya Indah No.38</p>
+                            </div>
+                            <div class="display-peoplepref display-female">
+                                <div class="display-sex-icon"><img src="./images/female.svg" alt="femalesign"></div>
+                                <p class="display-sex-text">female only</p>
+                            </div>
+                            <button type="submit" class="display-delete">
+                                <p>Delete</p>                            
+                                <img src="./images/Trash.svg" alt="">
+                            </button>
+                        </li>
+                    <!-- <li class="display-item" id="display-badminton"></li>
+                    <li class="display-item" id="display-volleyball"></li> -->
+                    </ul>
+                </div>
+                <div class="display-content-per-date">
+                    <h4 class="display-date">Tuesday Dec 29, 07:00 WIB</h4>
+                    <ul class="display-list">
+                        <li class="display-item" id="display-badminton">
+                            <div class="display-color-identifier"><img src="./images/badminton2.svg" alt=""></div>
+                            <div class="display-text">
+                                <h2 class="display-title">Badmin Gasibu</h2>
+                                <div class="display-amount">
+                                    <img src="./images/group.svg" alt="">
+                                    <p>3 / 4</p>
+                                </div>
+                                <p class="display-peoplepref2 display-anysex2">
+                                    anyone can join
+                                </p>
+                                <!-- <p class="display-organized">Organized by <b>Ernest</b></p> -->
+                            </div>
+                            <div class="display-bar"></div>
+                            <div class="display-location">
+                                <p class="display-place">Lapangan Gasibu</p>
+                                <p class="display-address" style="text-overflow: ellipsis">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean m</p>
+                            </div>
+                            <div class="display-peoplepref display-anysex">
+                                <div class="display-sex-icon"><img src="./images/anysex.svg" alt="malesign"></div>
+                                <p class="display-sex-text">anyone</p>
+                            </div>
+                            <button type="submit" class="display-leave">
+                                <p>Leave</p>
+                                <img src="./images/Leave.svg" alt="">
+                            </button>
+                        </li>
+                    </ul>    
+                </div>
+                <div class="display-content-per-date">
+                    <h4 class="display-date">Tuesday Dec 29, 10:00 WIB</h4>
+                    <ul class="display-list">
+                        <li class="display-item" id="display-volleyball">
+                            <div class="display-color-identifier"><img src="./images/volleyball2.svg" alt=""></div>
+                            <div class="display-text">
+                                <h2 class="display-title">Theo x Janice</h2>
+                                <div class="display-amount">
+                                    <img src="./images/group.svg" alt="">
+                                    <p>20 / 22</p>
+                                </div>
+                                <p class="display-peoplepref2 display-female2">
+                                    female only
+                                </p>
+                            </div>
+                            <div class="display-bar"></div>
+                            <div class="display-location">
+                                <p class="display-place" style="text-overflow: ellipsis">WWWWWWWWWW WWWWWWWWW</p>
+                                <p class="display-address">Jl. Suryalaya Indah No.38</p>
+                            </div>
+                            <div class="display-peoplepref display-female">
+                                <div class="display-sex-icon"><img src="./images/female.svg" alt="femalesign"></div>
+                                <p class="display-sex-text">female only</p>
+                            </div>
+                            <button type="submit" class="display-delete">
+                                <p>Delete</p>                            
+                                <img src="./images/Trash.svg" alt="">
+                            </button>
+                        </li>
+                    </ul>       
+                </div>
+            </div>
+            <div class="modal modal-application">    
+                <form class="modal-box" action="">
+                    <div class="modal-close modal-close-application">+</div>
+                    <h4 class="modal-title">
+                        Request Application
+                    </h4>
+                    <label for="modal-textarea" class="modal-subtitle">
+                        Explain to the event owner about yourself (age, experiences, etc). 
+                    </label>
+                    <textarea name="modal-textarea" id="modal-textarea" maxlength="200" placeholder="Max 200 characters."></textarea>
+                    <input type="submit" value="SUBMIT" class="modal-submit modal-application-submit">
+                </form>
+            </div>
+            <div class="modal modal-reason">    
+                <form class="modal-box" action="">
+                    <div class="modal-close modal-close-reason">+</div>
+                    <h4 class="modal-title">
+                        State your reasons
+                    </h4>
+                    <label for="modal-textarea" class="modal-subtitle">
+                        Don’t forget to explain your participants why you cancel your event.
+                    </label>
+                    <textarea name="modal-textarea" id="modal-textarea" maxlength="200" placeholder="Max 200 characters."></textarea>
+                    <input type="submit" value="CONFIRM DELETE" class="modal-submit modal-reason-submit">
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+<script src="./schedule.js"></script>
+</html>
