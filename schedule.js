@@ -352,8 +352,110 @@ function renderMatch3(doc, id) {
   }
 }
 
+// document.addEventListener("click", () => {
+//   // DISPLAY APPLICATION FOR DELETE, AND LEAVE
+
+//   // LEAVE
+//   let buttons_leave = document.querySelectorAll(".display-leave");
+//   buttons_leave.forEach(but => {
+//     but.addEventListener('click', () => {
+//       let button_parent_data_id = but.parentNode.getAttribute("data-id");
+
+//       let li_selected = but.parentNode;
+//       let ul_selected = li_selected.parentNode;
+//       let ul_selected_child = li_selected.parentNode.childElementCount;
+//       let div_selected = ul_selected.parentNode;
+
+//       // db.collection('match').doc(button_parent_data_id).update({
+//       //   matches_join: firebase.firestore.FieldValue.arrayRemove("1fj3C0p3vowY8tCrpHNa")
+//       // });
+
+//       if (ul_selected_child < 2) {
+//         display_container.removeChild(div_selected)
+//       } else {
+//         ul_selected.removeChild(li_selected);
+//       }
+
+//     })
+//   })
+
+//   // DELETE
+//   let modalReason = document.querySelectorAll(".display-delete");
+//   for (var i = 0; i < modalReason.length; i++) {
+//     modalReason[i].addEventListener('click',
+//       function () {
+//         this.id = "selected_button";
+//         document.querySelector(".modal-reason").style.display = 'flex';
+//       });
+//   }
+
+//   let text_area_application = document.querySelectorAll("#modal-textarea");
+
+//   // FORM DELETE 
+//   document.querySelector(".modal-close-reason").addEventListener('click',
+//     function () {
+//       let selected_button = document.querySelectorAll("#selected_button");
+//       selected_button.forEach(button => {
+//         button.removeAttribute('id');
+//       })
+//       document.querySelector(".modal-reason").style.display = 'none';
+//       text_area_application.forEach(text_area => {
+//         text_area.value = "";
+//       })
+//     });
+
+//   let modal_reason_submit = document.querySelectorAll(".modal-reason-submit");
+//   modal_reason_submit.forEach(reason => {
+//     reason.addEventListener('click', (e) => {
+//       e.preventDefault();
+//       let textarea = reason.parentNode.querySelector("textarea");
+//       if (textarea.value.length < 20) {
+//         error.style.display = "flex";
+//       } else {
+//         let button_chosen = document.getElementById("selected_button");
+//         let button_parent_data_id = button_chosen.parentNode.getAttribute("data-id");
+
+//         // // DELETE OWNER FIELD
+//         db.collection('match').doc(button_parent_data_id).set({
+//           reason: textarea.value.trim()
+//         }, {
+//           merge: true
+//         });
+
+//         db.collection('match').doc(button_parent_data_id).update({
+//           owner: firebase.firestore.FieldValue.delete()
+//         });
+
+//         // REMOVE ELEMENT FROM PARENT
+//         let button_selected = document.getElementById("selected_button");
+//         let li_selected = button_selected.parentNode;
+//         let ul_selected = li_selected.parentNode;
+//         let ul_selected_child = li_selected.parentNode.childElementCount;
+//         let div_selected = ul_selected.parentNode;
+
+//         if (ul_selected_child < 2) {
+//           display_container.removeChild(div_selected)
+//         } else {
+//           ul_selected.removeChild(li_selected);
+//         }
+
+//         let selected_button = document.querySelectorAll("#selected_button");
+//         selected_button.forEach(button => {
+//           button.removeAttribute('id');
+//         })
+//         text_area_application.forEach(text_area => {
+//           text_area.value = "";
+//         })
+
+//         document.querySelector(".modal-reason").style.display = 'none';
+//       }
+//     });
+//   })
+// })
+
+
 document.addEventListener("click", () => {
-  // DISPLAY APPLICATION FOR DELETE, AND LEAVE
+  // DISPLAY APPLICATION FOR REQUEST, DELETE, AND WITHDRAW
 
   // LEAVE
   let buttons_leave = document.querySelectorAll(".display-leave");
@@ -361,21 +463,13 @@ document.addEventListener("click", () => {
     but.addEventListener('click', () => {
       let button_parent_data_id = but.parentNode.getAttribute("data-id");
 
-      let li_selected = but.parentNode;
-      let ul_selected = li_selected.parentNode;
-      let ul_selected_child = li_selected.parentNode.childElementCount;
-      let div_selected = ul_selected.parentNode;
+      db.collection('match').doc(button_parent_data_id).update({
+        matches_join: firebase.firestore.FieldValue.arrayRemove("1fj3C0p3vowY8tCrpHNa")
+      });
 
-      // db.collection('match').doc(button_parent_data_id).update({
-      //   matches_join: firebase.firestore.FieldValue.arrayRemove("1fj3C0p3vowY8tCrpHNa")
-      // });
-
-      if (ul_selected_child < 2) {
-        display_container.removeChild(div_selected)
-      } else {
-        ul_selected.removeChild(li_selected);
-      }
-
+      but.className = "display-request";
+      but.querySelector(".button_p").innerHTML = "Request";
+      but.querySelector(".button_image").src = "./images/Right arrow.svg";
     })
   })
 
@@ -410,21 +504,42 @@ document.addEventListener("click", () => {
       e.preventDefault();
       let textarea = reason.parentNode.querySelector("textarea");
       if (textarea.value.length < 20) {
-        error.style.display = "flex";
+        console.log("Enter 20 CHARACTERS");
       } else {
         let button_chosen = document.getElementById("selected_button");
         let button_parent_data_id = button_chosen.parentNode.getAttribute("data-id");
 
-        // // DELETE OWNER FIELD
-        db.collection('match').doc(button_parent_data_id).set({
-          reason: textarea.value.trim()
-        }, {
-          merge: true
-        });
+        // // DELETE OWNER FIELD AND ADD STATUS FIELD
+        // db.collection('match').doc(button_parent_data_id).set({
+        //     reason: textarea.value.trim()
+        // }, {
+        //     merge: true
+        // });
 
-        db.collection('match').doc(button_parent_data_id).update({
-          owner: firebase.firestore.FieldValue.delete()
-        });
+        let reason = textarea.value.trim();
+        let reason_final = `***************************************************************************\n\nTHE OWNER HAS CANCELLED THE EVENT!\n\nThe owner's reason: ${reason}\n\n***************************************************************************`;
+
+        //APPEND MESSAGE TO THE DATABASE
+        dbf.ref('all_chats' + `/${button_parent_data_id}`).once('value', function (message_object) {
+          // This index is mortant. It will help organize the chat in order
+          var index = parseFloat(message_object.numChildren()) + 1
+          dbf.ref('all_chats' + `/${button_parent_data_id}` + `/message_${index}`).set({
+            name: "SYSTEM",
+            message: `${reason_final}`,
+            index: index
+          })
+        })
+
+        // GET DATE + 1 FROM TODAY
+        let current_full_date = new Date();
+        let updatedtime = current_full_date.setDate(current_full_date.getDate() + 1);
+        let finaltime = new Date(updatedtime);
+
+        // db.collection('match').doc(button_parent_data_id).update({
+        //     owner: firebase.firestore.FieldValue.delete(),
+        //     status: "deleted",
+        //     date: finaltime
+        // });
 
         // REMOVE ELEMENT FROM PARENT
         let button_selected = document.getElementById("selected_button");
